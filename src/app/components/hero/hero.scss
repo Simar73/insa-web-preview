@@ -31,18 +31,20 @@
   }
 
   &__visual {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    position: relative;
+    min-height: 360px;
+    align-self: stretch;
 
     @media (max-width: $bp-mobile) {
       display: none;
     }
   }
 
-  &__pattern {
+  &__canvas {
+    position: absolute;
+    inset: 0;
+    display: block;
     width: 100%;
-    max-width: 480px;
-    height: auto;
+    height: 100%;
   }
 }
