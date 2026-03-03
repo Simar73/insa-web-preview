@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, AfterViewInit, OnDestroy, ElementRef, ViewChild } from '@angular/core';
+import Swiper from 'swiper';
+import { Navigation, Pagination } from 'swiper/modules';
 
 export interface TeamMember {
   name: string;
@@ -13,8 +15,12 @@ export interface TeamMember {
   templateUrl: './team.html',
   styleUrl: './team.scss',
 })
-export class Team {
-  currentIndex = 0;
+export class Team implements AfterViewInit, OnDestroy {
+  @ViewChild('swiperEl') swiperRef!: ElementRef<HTMLElement>;
+  @ViewChild('prevBtn') prevRef!: ElementRef<HTMLElement>;
+  @ViewChild('nextBtn') nextRef!: ElementRef<HTMLElement>;
+
+  private swiper!: Swiper;
 
   members: TeamMember[] = [
     {
@@ -159,30 +165,31 @@ export class Team {
     },
   ];
 
-  // With 13 members and 4 visible, valid positions are 0–9 (10 dots)
-  get maxIndex(): number {
-    return this.members.length - 4;
+  ngAfterViewInit(): void {
+    setTimeout(() => {
+      this.swiper = new Swiper(this.swiperRef.nativeElement, {
+        modules: [Navigation, Pagination],
+        spaceBetween: 28,
+        slidesPerView: 1,
+        slidesPerGroup: 1,
+        loop: true,
+        navigation: {
+          prevEl: this.prevRef.nativeElement,
+          nextEl: this.nextRef.nativeElement,
+        },
+        pagination: {
+          el: '.team__pagination',
+          clickable: true,
+        },
+        breakpoints: {
+          768:  { slidesPerView: 2, slidesPerGroup: 2 },
+          1024: { slidesPerView: 4, slidesPerGroup: 4 },
+        },
+      });
+    }, 0);
   }
 
-  get dots(): number[] {
-    return Array.from({ length: this.members.length - 3 }, (_, i) => i);
-  }
-
-  // Card width = calc(25cqw - 21px)  [= (100cqw - 3*28px) / 4]
-  // Step       = calc(25cqw + 7px)   [= cardWidth + 28px gap]
-  get trackTransform(): string {
-    return `translateX(calc(-${this.currentIndex} * (25cqw + 7px)))`;
-  }
-
-  prev(): void {
-    if (this.currentIndex > 0) this.currentIndex--;
-  }
-
-  next(): void {
-    if (this.currentIndex < this.maxIndex) this.currentIndex++;
-  }
-
-  goTo(i: number): void {
-    this.currentIndex = i;
+  ngOnDestroy(): void {
+    if (this.swiper) this.swiper.destroy(true, true);
   }
 }

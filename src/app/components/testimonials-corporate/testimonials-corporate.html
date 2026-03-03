@@ -1,38 +1,55 @@
-<section class="testimonials-corp section" id="client-voices">
+<section class="tc section" id="client-voices">
   <div class="container">
-    <div class="section-header">
+    <div class="section-header fade-up">
       <div class="accent-rule"></div>
       <span class="section-label">CLIENT VOICES</span>
       <h2 class="h2-section">What Our Clients Say</h2>
     </div>
-    <div class="testimonials-corp__grid">
-      <div class="testimonials-corp__card fade-up">
-        <blockquote class="testimonials-corp__quote">
-          "[ Corporate client testimonial to be added ]"
-        </blockquote>
-        <div class="testimonials-corp__author">
-          <strong class="testimonials-corp__name">[ Client Name ]</strong>
-          <span class="testimonials-corp__role">[ Designation, Organisation ]</span>
+
+    <div class="tc__carousel-wrap">
+
+      <!-- Left arrow (outside swiper so it doesn't overlap slides) -->
+      <button class="tc__arrow" #prevBtn aria-label="Previous testimonial">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+          <path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+
+      <div class="swiper tc__swiper" #swiperEl>
+        <div class="swiper-wrapper">
+          <div class="swiper-slide" *ngFor="let card of cards">
+            <div class="tc__card">
+
+              <div class="tc__logo-wrap">
+                <div class="tc__logo-placeholder"></div>
+                <img [src]="card.logo" [alt]="card.name" class="tc__logo"
+                     (error)="onLogoError($event)" />
+              </div>
+
+              <div class="tc__divider"></div>
+
+              <blockquote class="tc__quote">{{ card.quote }}</blockquote>
+
+              <div class="tc__author">
+                <strong class="tc__name">{{ card.name }}</strong>
+                <span class="tc__role">{{ card.title }}</span>
+              </div>
+
+            </div>
+          </div>
         </div>
+
+        <!-- Dots sit inside the swiper so they're centred under the slides -->
+        <div class="swiper-pagination tc__pagination"></div>
       </div>
-      <div class="testimonials-corp__card fade-up">
-        <blockquote class="testimonials-corp__quote">
-          "[ Corporate client testimonial to be added ]"
-        </blockquote>
-        <div class="testimonials-corp__author">
-          <strong class="testimonials-corp__name">[ Client Name ]</strong>
-          <span class="testimonials-corp__role">[ Designation, Organisation ]</span>
-        </div>
-      </div>
-      <div class="testimonials-corp__card fade-up">
-        <blockquote class="testimonials-corp__quote">
-          "[ Corporate client testimonial to be added ]"
-        </blockquote>
-        <div class="testimonials-corp__author">
-          <strong class="testimonials-corp__name">[ Client Name ]</strong>
-          <span class="testimonials-corp__role">[ Designation, Organisation ]</span>
-        </div>
-      </div>
+
+      <!-- Right arrow -->
+      <button class="tc__arrow" #nextBtn aria-label="Next testimonial">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+          <path d="M9 18l6-6-6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+
     </div>
   </div>
 </section>

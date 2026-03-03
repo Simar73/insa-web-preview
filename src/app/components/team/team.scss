@@ -8,32 +8,18 @@
     margin-top: 12px;
   }
 
-  // ── Carousel shell ────────────────────────────────────────────
-  &__carousel-wrapper {
+  // ── Outer wrapper: arrow | swiper | arrow ─────────────────────
+  &__carousel-wrap {
     display: flex;
-    align-items: stretch;
+    align-items: center;
     gap: 16px;
   }
 
-  &__carousel-viewport {
-    flex: 1;
-    overflow: hidden;
-    container-type: inline-size; // makes 1cqw = 1% of this element's width
-    min-width: 0;
-  }
-
-  &__carousel-track {
-    display: flex;
-    gap: $grid-gap; // 28px
-    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-
-  // ── Arrow buttons ─────────────────────────────────────────────
+  // ── Custom arrows ─────────────────────────────────────────────
   &__arrow {
     flex-shrink: 0;
-    align-self: center;
-    width: 40px;
-    height: 40px;
+    width: 44px;
+    height: 44px;
     border-radius: 50%;
     border: 1.5px solid $light-grey;
     background: $white;
@@ -44,48 +30,22 @@
     cursor: pointer;
     transition: background 0.2s, border-color 0.2s, color 0.2s;
 
-    &:hover:not([disabled]) {
+    &:hover {
       background: $primary;
       color: $white;
       border-color: $primary;
     }
-
-    &[disabled] {
-      opacity: 0.28;
-      cursor: default;
-    }
   }
 
-  // ── Dot indicators ────────────────────────────────────────────
-  &__dots {
-    display: flex;
-    justify-content: center;
-    gap: 8px;
-    margin-top: 36px;
-  }
-
-  &__dot {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: $light-grey;
-    border: none;
-    padding: 0;
-    cursor: pointer;
-    transition: background 0.2s, transform 0.2s;
-
-    &.active {
-      background: $primary;
-      transform: scale(1.4);
-    }
+  // ── Swiper container ──────────────────────────────────────────
+  &__swiper {
+    flex: 1;
+    min-width: 0;
+    padding-bottom: 48px !important;
   }
 
   // ── Cards ─────────────────────────────────────────────────────
-  // Width formula:
-  //   4 cards + 3 gaps = 100cqw
-  //   card = (100cqw - 3*28px) / 4 = 25cqw - 21px
   &__card {
-    flex: 0 0 calc(25cqw - 21px);
     border: 1px solid $light-grey;
     padding: 28px 24px;
     box-shadow: $shadow-card;
@@ -93,6 +53,8 @@
     display: flex;
     flex-direction: column;
     gap: 16px;
+    height: 100%;
+    box-sizing: border-box;
 
     &:hover {
       transform: translateY(-4px);
@@ -174,32 +136,33 @@
 
     &:hover { color: $primary; }
   }
+}
 
-  // ── Mobile: disable carousel, stack all cards ─────────────────
-  @media (max-width: $bp-mobile) {
-    &__carousel-wrapper {
-      flex-direction: column;
-      gap: 0;
-    }
+// ── Swiper internals (pierce encapsulation, scoped to .team__swiper) ──
+::ng-deep .team__swiper {
 
-    &__carousel-viewport {
-      overflow: visible;
-    }
+  .swiper-wrapper {
+    align-items: stretch;
+  }
 
-    &__carousel-track {
-      flex-direction: column;
-      transform: none !important;
-      transition: none;
-    }
+  .swiper-slide {
+    height: auto;
+  }
 
-    &__card {
-      flex: 0 0 auto;
-      width: 100%;
-    }
+  .swiper-pagination {
+    bottom: 8px;
+  }
 
-    &__arrow,
-    &__dots {
-      display: none;
+  .swiper-pagination-bullet {
+    width: 8px;
+    height: 8px;
+    background: $light-grey;
+    opacity: 1;
+    transition: background 0.2s, transform 0.2s;
+
+    &-active {
+      background: $primary;
+      transform: scale(1.4);
     }
   }
 }
