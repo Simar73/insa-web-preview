@@ -1,0 +1,82 @@
+// ============================================
+// InsAnalytics — Typography
+// Version A: BCG Editorial — Playfair Display dominant
+// ============================================
+
+@import 'variables';
+
+// Base
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: $font-body;
+  color: $mid-grey;
+  line-height: 1.7;
+}
+
+// Display headings (Playfair Display — all versions)
+h1, h2, h3, h4 {
+  font-family: $font-display;
+  color: $dark;
+  line-height: 1.2;
+  margin: 0;
+}
+
+// Hero H1
+.h1-hero {
+  font-family: $font-display;
+  font-size: clamp(40px, 5vw, 64px);
+  font-weight: 700;
+  color: $dark;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+// Section H2
+.h2-section {
+  font-family: $font-display;
+  font-size: clamp(28px, 3.5vw, 42px);
+  font-weight: 700;
+  color: $primary;
+  line-height: 1.2;
+}
+
+// Card H3
+.h3-card {
+  font-family: $font-display;
+  font-size: clamp(18px, 2vw, 24px);
+  font-weight: 700;
+  color: $dark;
+}
+
+// Section label (small caps above H2)
+.section-label {
+  font-family: $font-heading;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: $accent;
+  display: block;
+  margin-bottom: 12px;
+}
+
+// Body text
+.body-text {
+  font-family: $font-body;
+  font-size: clamp(15px, 1.1vw, 17px);
+  color: $mid-grey;
+  line-height: 1.75;
+}
+
+// Subheadline (hero subhead)
+.subhead {
+  font-family: $font-body;
+  font-size: clamp(17px, 1.3vw, 20px);
+  color: $mid-grey;
+  line-height: 1.7;
+}

@@ -1,0 +1,37 @@
+// ============================================
+// InsAnalytics — Design Tokens
+// Version A: BCG Editorial
+// ============================================
+
+// --- Brand Colors ---
+$primary:     #2B2D7E;   // Deep navy/indigo
+$accent:      #3DB84B;   // Fresh green — bell curve
+$white:       #FFFFFF;
+$off-white:   #F7F8FC;
+$hero-bg:     #F5F5F5;   // BCG version hero background
+$light-grey:  #EAECF4;
+$mid-grey:    #6B7280;
+$dark:        #1A1A2E;
+
+// --- Typography ---
+$font-display: 'Playfair Display', serif;
+$font-heading: 'DM Sans', sans-serif;
+$font-body:    'Source Serif 4', serif;
+
+// --- Spacing ---
+$section-padding-desktop: 100px;
+$section-padding-mobile:  60px;
+$container-max:           1200px;
+$container-padding:       80px;
+$container-padding-mobile: 24px;
+$grid-gap:                28px;
+
+// --- Shadows ---
+$shadow-card:       0 2px 16px rgba(43, 45, 126, 0.06);
+$shadow-card-hover: 0 8px 32px rgba(43, 45, 126, 0.14);
+$shadow-navbar:     0 2px 20px rgba(43, 45, 126, 0.10);
+
+// --- Breakpoints ---
+$bp-mobile:  768px;
+$bp-tablet:  1024px;
+$bp-desktop: 1440px;

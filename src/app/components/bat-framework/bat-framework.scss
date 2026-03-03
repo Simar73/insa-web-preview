@@ -1,0 +1,94 @@
+@import '../../../styles/scss/variables';
+
+.bat {
+  background: $primary;
+  color: $white;
+  padding: 100px 0;
+
+  @media (max-width: $bp-mobile) {
+    padding: 60px 0;
+  }
+
+  &__header {
+    margin-bottom: 64px;
+    max-width: 720px;
+  }
+
+  &__heading {
+    font-family: $font-display;
+    font-size: clamp(28px, 3.5vw, 44px);
+    font-weight: 700;
+    color: $white;
+    line-height: 1.15;
+    margin-bottom: 20px;
+  }
+
+  &__subhead {
+    font-family: $font-body;
+    font-size: clamp(16px, 1.2vw, 18px);
+    color: rgba(255,255,255,0.75);
+    line-height: 1.7;
+    margin: 0;
+  }
+
+  &__pillars {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+    margin-bottom: 64px;
+
+    @media (max-width: $bp-mobile) {
+      grid-template-columns: 1fr;
+      gap: 48px;
+    }
+  }
+
+  &__pillar {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  &__letter {
+    font-family: $font-display;
+    font-size: clamp(100px, 12vw, 140px);
+    font-weight: 700;
+    color: $accent;
+    line-height: 0.85;
+    display: block;
+  }
+
+  &__pillar-title {
+    font-family: $font-heading;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: $accent;
+    margin-bottom: 12px;
+  }
+
+  &__pillar-text {
+    font-family: $font-body;
+    font-size: 16px;
+    color: rgba(255,255,255,0.8);
+    line-height: 1.75;
+    margin: 0;
+  }
+
+  &__quote {
+    text-align: center;
+    padding-top: 48px;
+    border-top: 1px solid rgba(255,255,255,0.15);
+
+    blockquote {
+      font-family: $font-display;
+      font-style: italic;
+      font-size: clamp(18px, 2vw, 24px);
+      color: rgba(255,255,255,0.9);
+      line-height: 1.5;
+      max-width: 680px;
+      margin: 0 auto;
+    }
+  }
+}

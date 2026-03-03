@@ -1,0 +1,114 @@
+@import '../../../styles/scss/variables';
+
+.team {
+  background: $white;
+
+  &__subhead {
+    max-width: 600px;
+    margin-top: 12px;
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: $grid-gap;
+
+    @media (max-width: $bp-tablet) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @media (max-width: $bp-mobile) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  &__card {
+    border: 1px solid $light-grey;
+    padding: 28px 24px;
+    box-shadow: $shadow-card;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
+    &:hover {
+      transform: translateY(-4px);
+      box-shadow: $shadow-card-hover;
+    }
+  }
+
+  &__avatar {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: $primary;
+    color: $white;
+    font-family: $font-heading;
+    font-size: 18px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  &__info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__name {
+    font-family: $font-display;
+    font-size: 16px;
+    font-weight: 700;
+    color: $dark;
+    margin-bottom: 4px;
+  }
+
+  &__title {
+    font-family: $font-heading;
+    font-size: 12px;
+    font-weight: 500;
+    color: $accent;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 14px;
+    line-height: 1.4;
+  }
+
+  &__credentials {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+
+    li {
+      font-family: $font-heading;
+      font-size: 12px;
+      color: $mid-grey;
+      line-height: 1.5;
+      padding-left: 10px;
+      position: relative;
+
+      &::before {
+        content: '—';
+        position: absolute;
+        left: 0;
+        color: $accent;
+        font-size: 10px;
+      }
+    }
+  }
+
+  &__linkedin {
+    display: inline-flex;
+    margin-top: 14px;
+    color: $mid-grey;
+    transition: color 0.2s;
+
+    &:hover { color: $primary; }
+  }
+}

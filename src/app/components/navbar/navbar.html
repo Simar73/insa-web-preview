@@ -1,0 +1,19 @@
+<nav class="navbar" [class.scrolled]="isScrolled">
+  <div class="container navbar__inner">
+    <a class="navbar__logo" href="#" (click)="smoothScroll($event, 'hero')">
+      <img src="logo.png" alt="InsAnalytics — Insights. Through Analytics." class="navbar__logo-img"
+           (error)="logoImg.style.display='none'; logoText.style.display='block'" #logoImg />
+      <span class="navbar__logo-text" #logoText style="display:none">InsAnalytics</span>
+    </a>
+    <ul class="navbar__links" [class.open]="menuOpen">
+      <li><a href="#what-we-do" (click)="smoothScroll($event, 'what-we-do')">What We Do</a></li>
+      <li><a href="#team" (click)="smoothScroll($event, 'team')">Our Team</a></li>
+      <li><a href="#contact" (click)="smoothScroll($event, 'contact')">Contact Us</a></li>
+    </ul>
+    <button class="navbar__hamburger" [class.open]="menuOpen" (click)="toggleMenu()" aria-label="Toggle menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </div>
+</nav>

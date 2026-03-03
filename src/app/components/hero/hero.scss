@@ -1,0 +1,48 @@
+@import '../../../styles/scss/variables';
+
+.hero {
+  background: $hero-bg;
+  padding: 100px 0 100px;
+
+  @media (max-width: $bp-mobile) {
+    padding: 60px 0 60px;
+  }
+
+  &__inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+
+    @media (max-width: $bp-mobile) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  &__content {
+    .section-label { margin-bottom: 20px; }
+
+    .h1-hero { margin-bottom: 28px; }
+  }
+
+  &__subhead {
+    margin-bottom: 40px;
+    max-width: 520px;
+  }
+
+  &__visual {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    @media (max-width: $bp-mobile) {
+      display: none;
+    }
+  }
+
+  &__pattern {
+    width: 100%;
+    max-width: 480px;
+    height: auto;
+  }
+}

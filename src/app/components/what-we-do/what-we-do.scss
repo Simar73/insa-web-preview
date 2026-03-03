@@ -1,0 +1,42 @@
+@import '../../../styles/scss/variables';
+
+.what-we-do {
+  background: $white;
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: $grid-gap;
+
+    @media (max-width: $bp-mobile) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  &__card {
+    padding: 40px;
+    border: 1px solid $light-grey;
+    box-shadow: $shadow-card;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    background: $white;
+
+    &:hover {
+      transform: translateY(-4px);
+      box-shadow: $shadow-card-hover;
+    }
+  }
+
+  &__icon {
+    margin-bottom: 20px;
+  }
+
+  .h3-card {
+    color: $primary;
+    margin-bottom: 16px;
+    font-family: $font-display;
+  }
+
+  .body-text {
+    margin: 0;
+  }
+}
