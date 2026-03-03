@@ -16,7 +16,7 @@
 
   &__heading {
     font-family: $font-display;
-    font-size: clamp(28px, 3.5vw, 44px);
+    font-size: clamp(28px, 3.5vw, 39px);
     font-weight: 700;
     color: $white;
     line-height: 1.15;
@@ -33,9 +33,14 @@
 
   &__pillars {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 40px;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 32px;
     margin-bottom: 64px;
+
+    @media (max-width: $bp-tablet) {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 40px;
+    }
 
     @media (max-width: $bp-mobile) {
       grid-template-columns: 1fr;
@@ -51,7 +56,7 @@
 
   &__letter {
     font-family: $font-display;
-    font-size: clamp(100px, 12vw, 140px);
+    font-size: clamp(72px, 8vw, 110px);
     font-weight: 700;
     color: $accent;
     line-height: 0.85;

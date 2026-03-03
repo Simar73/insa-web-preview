@@ -1,4 +1,4 @@
-import { Component, AfterViewInit, ElementRef, QueryList, ViewChildren } from '@angular/core';
+import { Component } from '@angular/core';
 
 export interface TeamMember {
   name: string;
@@ -13,8 +13,8 @@ export interface TeamMember {
   templateUrl: './team.html',
   styleUrl: './team.scss',
 })
-export class Team implements AfterViewInit {
-  @ViewChildren('card') cards!: QueryList<ElementRef>;
+export class Team {
+  currentIndex = 0;
 
   members: TeamMember[] = [
     {
@@ -51,6 +51,18 @@ export class Team implements AfterViewInit {
       ],
     },
     {
+      name: 'Mr. Jayanta Adhikari',
+      title: 'Chief Consultant, Financial Analytics',
+      initials: 'JA',
+      credentials: [
+        '30+ years across BFSI, Retail, Manufacturing',
+        'Reduced Fortune 500 client\'s financial book closure cycle from 45 days to 15 days',
+        'Head of Financial Analytics & Business Analytics, TCS',
+        'Expertise: FP&A, Demand Planning, Customer Analytics',
+        'CFA Level 2 | SMP IIM Calcutta | B.Tech IIT BHU',
+      ],
+    },
+    {
       name: 'Dr. Ayan Chatterjee',
       title: 'Chief Technology Officer',
       initials: 'AC',
@@ -59,38 +71,6 @@ export class Team implements AfterViewInit {
         'AI platforms for Drug Discovery at AstraZeneca',
         'Expertise: GenAI, NLP, Graph ML, Computer Vision, AI Hardware',
         'PhD CS, Northeastern University Boston | M.Tech IISc Bangalore',
-      ],
-    },
-    {
-      name: 'Mr. Jayanta Adhikari',
-      title: 'Chief Consultant, Financial Analytics',
-      initials: 'JA',
-      credentials: [
-        '30+ years across BFSI, Retail, Manufacturing',
-        'Head of Financial Analytics & Business Analytics, TCS',
-        'Expertise: FP&A, Demand Planning, Customer Analytics',
-        'CFA Level 2 | SMP IIM Calcutta | B.Tech IIT BHU',
-      ],
-    },
-    {
-      name: 'Ms. Amrita Saha',
-      title: 'Sr. Data Scientist, AI-ML & Statistical Modeling',
-      initials: 'AS',
-      credentials: [
-        '15 years in AI, GenAI, Big Data Analytics, RPA',
-        'Expertise: Statistical Modeling, Time Series, Panel Data Regression',
-        'Sectors: BFSI, Energy/Utility, Manufacturing',
-        'PhD Scholar (AI in Energy Economics) BITS Pilani | M.Tech Data Science, BITS Pilani',
-      ],
-    },
-    {
-      name: 'Mr. Abhishek Ranjan',
-      title: 'Chief Business Officer',
-      initials: 'AR',
-      credentials: [
-        '19+ years across Technology, Power, Real Estate, Retail, Hospitality',
-        'Expertise: Business Strategy, Client Relationship, Asset Monetization',
-        'MBA Power Management, NPTI | BE Electronics, BIT Sindri',
       ],
     },
     {
@@ -105,13 +85,45 @@ export class Team implements AfterViewInit {
       ],
     },
     {
-      name: 'Mr. Kaustav Chakraborty',
-      title: 'Consultant, IT Architecture, Blockchain & Cloud',
-      initials: 'KC',
+      name: 'Mr. Hridam Basu',
+      title: 'Sr. Consultant, AI/GenAI & Blockchain',
+      initials: 'HB',
       credentials: [
-        '20+ years in Enterprise Architecture, Blockchain, Microservices, IoT',
-        'Expertise: Real-time Data Processing, Cloud, DevOps, Embedded Systems',
-        'B.Tech Electronics & Instrumentation, WBUT',
+        '8+ years in AI/GenAI, Cryptography, Blockchain & Decentralized Networks',
+        'Cryptography roles at Ethereum Foundation, Aztec Protocol, Polygon, Neptune Cash',
+        'Research Intern at TCS Innovation Labs, AT&T Labs, NTT Labs, ISI Kolkata',
+        'MS Computer Science, Northeastern University Boston | BE IT, Jadavpur University',
+      ],
+    },
+    {
+      name: 'Mr. Srijan Biswas',
+      title: 'Consultant, AI/GenAI',
+      initials: 'SB',
+      credentials: [
+        '6.5 years in AI/GenAI, Multi-cloud Platforms (AWS, Azure, IBM Cloud), Finance & Trading',
+        'Software Developer at Cantor Fitzgerald (US), Reliance Industries',
+        'MS Computer Science, Stevens Institute of Technology, NJ | BE CS, Jadavpur University',
+      ],
+    },
+    {
+      name: 'Mr. Abhishek Ranjan',
+      title: 'Chief Business Officer',
+      initials: 'AR',
+      credentials: [
+        '19+ years across Technology, Power, Real Estate, Retail, Hospitality',
+        'Expertise: Business Strategy, Client Relationship, Asset Monetization',
+        'MBA Power Management, NPTI | BE Electronics, BIT Sindri',
+      ],
+    },
+    {
+      name: 'Ms. Amrita Saha',
+      title: 'Sr. Data Scientist, AI-ML & Statistical & Econometrics Modeling',
+      initials: 'AS',
+      credentials: [
+        '15 years in AI, GenAI, Big Data Analytics, RPA',
+        'Expertise: Statistical Modeling, Time Series, Panel Data Regression',
+        'Sectors: BFSI, Energy/Utility, Manufacturing',
+        'PhD Scholar (AI in Energy Economics) BITS Pilani | M.Tech Data Science, BITS Pilani',
       ],
     },
     {
@@ -122,6 +134,16 @@ export class Team implements AfterViewInit {
         '30+ years R&D and leadership at DRDO, Reliance, Capgemini, Tech Mahindra',
         'Expertise: Strategic Management, Program Management, Defense, Telecom',
         'M.Tech Electrical Engineering, IIT Madras | B.Tech IIT Kharagpur',
+      ],
+    },
+    {
+      name: 'Mr. Kaustav Chakraborty',
+      title: 'Consultant, IT Architecture, Blockchain & Cloud',
+      initials: 'KC',
+      credentials: [
+        '20+ years in Enterprise Architecture, Blockchain, Microservices, IoT',
+        'Expertise: Real-time Data Processing, Cloud, DevOps, Embedded Systems',
+        'B.Tech Electronics & Instrumentation, WBUT',
       ],
     },
     {
@@ -137,17 +159,30 @@ export class Team implements AfterViewInit {
     },
   ];
 
-  ngAfterViewInit() {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-          }
-        });
-      },
-      { threshold: 0.1 }
-    );
-    this.cards.forEach((card) => observer.observe(card.nativeElement));
+  // With 13 members and 4 visible, valid positions are 0–9 (10 dots)
+  get maxIndex(): number {
+    return this.members.length - 4;
+  }
+
+  get dots(): number[] {
+    return Array.from({ length: this.members.length - 3 }, (_, i) => i);
+  }
+
+  // Card width = calc(25cqw - 21px)  [= (100cqw - 3*28px) / 4]
+  // Step       = calc(25cqw + 7px)   [= cardWidth + 28px gap]
+  get trackTransform(): string {
+    return `translateX(calc(-${this.currentIndex} * (25cqw + 7px)))`;
+  }
+
+  prev(): void {
+    if (this.currentIndex > 0) this.currentIndex--;
+  }
+
+  next(): void {
+    if (this.currentIndex < this.maxIndex) this.currentIndex++;
+  }
+
+  goTo(i: number): void {
+    this.currentIndex = i;
   }
 }

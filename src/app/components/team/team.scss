@@ -8,21 +8,84 @@
     margin-top: 12px;
   }
 
-  &__grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: $grid-gap;
+  // ── Carousel shell ────────────────────────────────────────────
+  &__carousel-wrapper {
+    display: flex;
+    align-items: stretch;
+    gap: 16px;
+  }
 
-    @media (max-width: $bp-tablet) {
-      grid-template-columns: repeat(2, 1fr);
+  &__carousel-viewport {
+    flex: 1;
+    overflow: hidden;
+    container-type: inline-size; // makes 1cqw = 1% of this element's width
+    min-width: 0;
+  }
+
+  &__carousel-track {
+    display: flex;
+    gap: $grid-gap; // 28px
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  // ── Arrow buttons ─────────────────────────────────────────────
+  &__arrow {
+    flex-shrink: 0;
+    align-self: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1.5px solid $light-grey;
+    background: $white;
+    color: $primary;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.2s, border-color 0.2s, color 0.2s;
+
+    &:hover:not([disabled]) {
+      background: $primary;
+      color: $white;
+      border-color: $primary;
     }
 
-    @media (max-width: $bp-mobile) {
-      grid-template-columns: 1fr;
+    &[disabled] {
+      opacity: 0.28;
+      cursor: default;
     }
   }
 
+  // ── Dot indicators ────────────────────────────────────────────
+  &__dots {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 36px;
+  }
+
+  &__dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: $light-grey;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.2s;
+
+    &.active {
+      background: $primary;
+      transform: scale(1.4);
+    }
+  }
+
+  // ── Cards ─────────────────────────────────────────────────────
+  // Width formula:
+  //   4 cards + 3 gaps = 100cqw
+  //   card = (100cqw - 3*28px) / 4 = 25cqw - 21px
   &__card {
+    flex: 0 0 calc(25cqw - 21px);
     border: 1px solid $light-grey;
     padding: 28px 24px;
     box-shadow: $shadow-card;
@@ -110,5 +173,33 @@
     transition: color 0.2s;
 
     &:hover { color: $primary; }
+  }
+
+  // ── Mobile: disable carousel, stack all cards ─────────────────
+  @media (max-width: $bp-mobile) {
+    &__carousel-wrapper {
+      flex-direction: column;
+      gap: 0;
+    }
+
+    &__carousel-viewport {
+      overflow: visible;
+    }
+
+    &__carousel-track {
+      flex-direction: column;
+      transform: none !important;
+      transition: none;
+    }
+
+    &__card {
+      flex: 0 0 auto;
+      width: 100%;
+    }
+
+    &__arrow,
+    &__dots {
+      display: none;
+    }
   }
 }
